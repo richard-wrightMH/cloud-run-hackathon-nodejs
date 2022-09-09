@@ -11,7 +11,6 @@ app.get("/", function (req, res) {
 app.post("/", function (req, res) {
   var arena = req.body.arena;
   var state = req.body.arena.state;
-  console.log(arena);
 
   try {
     var x;
@@ -51,7 +50,7 @@ app.post("/", function (req, res) {
             } else {
               moves = ["L"];
             }
-          } else if (y - ey >= 3) {
+          } else if (y - ey <= 3) {
             moves = ["T"];
           }
         }
@@ -65,7 +64,7 @@ app.post("/", function (req, res) {
             } else {
               moves = ["R"];
             }
-          } else if (ey - y >= 3) {
+          } else if (ey - y <= 3) {
             moves = ["T"];
           }
         }
@@ -79,7 +78,7 @@ app.post("/", function (req, res) {
             } else {
               moves = ["R"];
             }
-          } else if (ex - x >= 3) {
+          } else if (ex - x <= 3) {
             moves = ["T"];
           }
         }
@@ -93,7 +92,7 @@ app.post("/", function (req, res) {
             } else {
               moves = ["L"];
             }
-          } else if (x - ex >= 3) {
+          } else if (x - ex <= 3) {
             moves = ["T"];
           }
         }
