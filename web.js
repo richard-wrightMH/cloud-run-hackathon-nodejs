@@ -44,62 +44,65 @@ app.post("/", function (req, res) {
 
         if (wasHit) {
           moves["F"];
-          if (dir == "N") {
-            if (y == 0) {
-              moves = ["L", "R"];
-            }
-            if (edir == "S" && y == ey - 1) {
-              if (x != dims[0] - 1) {
-                moves = ["R"];
-              } else {
-                moves = ["L"];
-              }
-            } else if (y - ey <= 3) {
-              moves = ["T"];
-            }
+        }
+        if (dir == "N") {
+          if (y == 0) {
+            moves = ["L", "R"];
           }
-          if (dir == "S") {
-            if (y == dims[1] - 1) {
-              moves = ["L", "R"];
+          if (edir == "S" && y == ey - 1) {
+            if (x != dims[0] - 1) {
+              moves = ["R"];
+            } else {
+              moves = ["L"];
             }
-            if (edir == "N" && y == ey + 1) {
-              if (x != dims[0] - 1) {
-                moves = ["L"];
-              } else {
-                moves = ["R"];
-              }
-            } else if (ey - y <= 3) {
-              moves = ["T"];
-            }
+          } else if (y - ey <= 3) {
+            moves = ["T"];
           }
-          if (dir == "E") {
-            if (x == dims[0] - 1) {
-              moves = ["L", "R"];
-            }
-            if (edir == "W" && x == ex - 1) {
-              if (y != dims[1] - 1) {
-                moves = ["L"];
-              } else {
-                moves = ["R"];
-              }
-            } else if (ex - x <= 3) {
-              moves = ["T"];
-            }
+        }
+        if (dir == "S") {
+          if (y == dims[1] - 1) {
+            moves = ["L", "R"];
           }
-          if (dir == "W") {
-            if (x == 0) {
-              moves = ["L", "R"];
+          if (edir == "N" && y == ey + 1) {
+            if (x != dims[0] - 1) {
+              moves = ["L"];
+            } else {
+              moves = ["R"];
             }
-            if (edir == "E" && x == ex + 1) {
-              if (y != dims[1] - 1) {
-                moves = ["R"];
-              } else {
-                moves = ["L"];
-              }
-            } else if (x - ex <= 3) {
-              moves = ["T"];
-            }
+          } else if (ey - y <= 3) {
+            moves = ["T"];
           }
+        }
+        if (dir == "E") {
+          if (x == dims[0] - 1) {
+            moves = ["L", "R"];
+          }
+          if (edir == "W" && x == ex - 1) {
+            if (y != dims[1] - 1) {
+              moves = ["L"];
+            } else {
+              moves = ["R"];
+            }
+          } else if (ex - x <= 3) {
+            moves = ["T"];
+          }
+        }
+        if (dir == "W") {
+          if (x == 0) {
+            moves = ["L", "R"];
+          }
+          if (edir == "E" && x == ex + 1) {
+            if (y != dims[1] - 1) {
+              moves = ["R"];
+            } else {
+              moves = ["L"];
+            }
+          } else if (x - ex <= 3) {
+            moves = ["T"];
+          }
+        }
+        if (wasHit) {
+          moves = ["F"];
         }
       }
     }
