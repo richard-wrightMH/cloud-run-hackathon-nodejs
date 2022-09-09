@@ -88,6 +88,7 @@ app.post("/", function (req, res) {
         }
       }
     }
+    console.log(moves[0]);
   } catch (e) {
     console.log("error", e);
   }
