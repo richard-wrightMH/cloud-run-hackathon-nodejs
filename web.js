@@ -19,6 +19,7 @@ app.post("/", function (req, res) {
     var dims = arena["dims"];
     var wasHit;
     var enemyInFront = false;
+    var shoot = false;
     moves = ["R"];
     for (const player in state) {
       if (
@@ -45,17 +46,29 @@ app.post("/", function (req, res) {
           if ((ex = x && ey == y - 1)) {
             enemyInFront = true;
           }
+          if (y - ey <= 2) {
+            shoot = true;
+          }
         } else if (dir == "S") {
           if ((ex = x && ey == y + 1)) {
             enemyInFront = true;
+          }
+          if (ey - y <= 2) {
+            shoot = true;
           }
         } else if (dir == "E") {
           if ((ey = y && ex == x + 1)) {
             enemyInFront = true;
           }
+          if (ex - x <= 2) {
+            shoot = true;
+          }
         } else if (dir == "W") {
           if ((ey = y && ex == x - 1)) {
             enemyInFront = true;
+          }
+          if (x - ex <= 2) {
+            shoot = true;
           }
         }
       }
@@ -81,13 +94,13 @@ app.post("/", function (req, res) {
         moves = ["F"];
       }
     } else {
-      if (dir == "N" && y - ey <= 2) {
+      if (dir == "N" && shoot) {
         moves = ["T"];
-      } else if (dir == "S" && ey - y <= 2) {
+      } else if (dir == "S" && shoot) {
         moves = ["T"];
-      } else if (dir == "E" && ex - x <= 2) {
+      } else if (dir == "E" && shoot) {
         moves = ["T"];
-      } else if (dir == "W" && x - ex <= 2) {
+      } else if (dir == "W" && shoot) {
         moves = ["T"];
       }
     }
