@@ -15,7 +15,13 @@ app.post("/", function (req, res) {
   console.log(state);
 
   try {
-    state.forEach(function (player) {});
+    for (const player in state) {
+      if (
+        player == "https://cloud-run-hackathon-nodejs-hircheuosa-uc.a.run.app"
+      ) {
+        console.log("ITS ME");
+      }
+    }
   } catch (e) {
     console.log("error", e);
   }
