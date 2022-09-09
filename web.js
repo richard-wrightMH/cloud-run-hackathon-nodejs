@@ -17,6 +17,7 @@ app.post("/", function (req, res) {
     var y;
     var dir;
     var dims = arena["dims"];
+    var wasHit;
     moves = ["F"];
     for (const player in state) {
       if (
@@ -27,6 +28,7 @@ app.post("/", function (req, res) {
         x = meObj["x"];
         y = meObj["y"];
         dir = meObj["direction"];
+        wasHit = meObj["wasHit"];
       }
     }
 
@@ -40,60 +42,63 @@ app.post("/", function (req, res) {
         var ey = enemyObj["y"];
         var edir = enemyObj["direction"];
 
-        if (dir == "N") {
-          if (y == 0) {
-            moves = ["L", "R"];
-          }
-          if (edir == "S" && y == ey - 1) {
-            if (x != dims[0] - 1) {
-              moves = ["R"];
-            } else {
-              moves = ["L"];
+        if (wasHit) {
+          moves["F"];
+          if (dir == "N") {
+            if (y == 0) {
+              moves = ["L", "R"];
             }
-          } else if (y - ey <= 3) {
-            moves = ["T"];
-          }
-        }
-        if (dir == "S") {
-          if (y == dims[1] - 1) {
-            moves = ["L", "R"];
-          }
-          if (edir == "N" && y == ey + 1) {
-            if (x != dims[0] - 1) {
-              moves = ["L"];
-            } else {
-              moves = ["R"];
+            if (edir == "S" && y == ey - 1) {
+              if (x != dims[0] - 1) {
+                moves = ["R"];
+              } else {
+                moves = ["L"];
+              }
+            } else if (y - ey <= 3) {
+              moves = ["T"];
             }
-          } else if (ey - y <= 3) {
-            moves = ["T"];
           }
-        }
-        if (dir == "E") {
-          if (x == dims[0] - 1) {
-            moves = ["L", "R"];
-          }
-          if (edir == "W" && x == ex - 1) {
-            if (y != dims[1] - 1) {
-              moves = ["L"];
-            } else {
-              moves = ["R"];
+          if (dir == "S") {
+            if (y == dims[1] - 1) {
+              moves = ["L", "R"];
             }
-          } else if (ex - x <= 3) {
-            moves = ["T"];
-          }
-        }
-        if (dir == "W") {
-          if (x == 0) {
-            moves = ["L", "R"];
-          }
-          if (edir == "E" && x == ex + 1) {
-            if (y != dims[1] - 1) {
-              moves = ["R"];
-            } else {
-              moves = ["L"];
+            if (edir == "N" && y == ey + 1) {
+              if (x != dims[0] - 1) {
+                moves = ["L"];
+              } else {
+                moves = ["R"];
+              }
+            } else if (ey - y <= 3) {
+              moves = ["T"];
             }
-          } else if (x - ex <= 3) {
-            moves = ["T"];
+          }
+          if (dir == "E") {
+            if (x == dims[0] - 1) {
+              moves = ["L", "R"];
+            }
+            if (edir == "W" && x == ex - 1) {
+              if (y != dims[1] - 1) {
+                moves = ["L"];
+              } else {
+                moves = ["R"];
+              }
+            } else if (ex - x <= 3) {
+              moves = ["T"];
+            }
+          }
+          if (dir == "W") {
+            if (x == 0) {
+              moves = ["L", "R"];
+            }
+            if (edir == "E" && x == ex + 1) {
+              if (y != dims[1] - 1) {
+                moves = ["R"];
+              } else {
+                moves = ["L"];
+              }
+            } else if (x - ex <= 3) {
+              moves = ["T"];
+            }
           }
         }
       }
