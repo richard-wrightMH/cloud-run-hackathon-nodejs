@@ -42,6 +42,9 @@ app.post("/", function (req, res) {
         var edir = enemyObj["direction"];
 
         if (dir == "N") {
+          if (y == 0) {
+            moves = ["L", "R"];
+          }
           if (edir == "S" && y == ey - 1) {
             if (x != dims[0] - 1) {
               moves = ["R"];
@@ -53,6 +56,9 @@ app.post("/", function (req, res) {
           }
         }
         if (dir == "S") {
+          if (y == dims[1] - 1) {
+            moves = ["L", "R"];
+          }
           if (edir == "N" && y == ey + 1) {
             if (x != dims[0] - 1) {
               moves = ["L"];
@@ -64,6 +70,9 @@ app.post("/", function (req, res) {
           }
         }
         if (dir == "E") {
+          if (x == dims[0] - 1) {
+            moves = ["L", "R"];
+          }
           if (edir == "W" && x == ex - 1) {
             if (y != dims[1] - 1) {
               moves = ["L"];
@@ -75,6 +84,9 @@ app.post("/", function (req, res) {
           }
         }
         if (dir == "W") {
+          if (x == 0) {
+            moves = ["L", "R"];
+          }
           if (edir == "E" && x == ex + 1) {
             if (y != dims[1] - 1) {
               moves = ["R"];
