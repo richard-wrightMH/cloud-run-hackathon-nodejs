@@ -63,7 +63,7 @@ app.post("/", function (req, res) {
             moves = ["F"];
           }
         } else {
-          if (dir == "N" && e - ey <= 2) {
+          if (dir == "N" && y - ey <= 2) {
             moves = ["T"];
           } else if (dir == "S" && ey - y <= 2) {
             moves = ["T"];
