@@ -103,12 +103,16 @@ app.post("/", function (req, res) {
       }
     } else {
       if (dir == "N" && shoot) {
+        console.log("shoot");
         moves = ["T"];
       } else if (dir == "S" && shoot) {
+        console.log("shoot");
         moves = ["T"];
       } else if (dir == "E" && shoot) {
+        console.log("shoot");
         moves = ["T"];
       } else if (dir == "W" && shoot) {
+        console.log("shoot");
         moves = ["T"];
       }
     }
