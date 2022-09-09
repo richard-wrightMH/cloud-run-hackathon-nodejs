@@ -18,6 +18,8 @@ app.post("/", function (req, res) {
     var dir;
     var dims = arena["dims"];
     var wasHit;
+    var allx = [];
+    var ally = [];
     moves = ["R"];
     for (const player in state) {
       if (
@@ -40,42 +42,42 @@ app.post("/", function (req, res) {
         var enemyObj = state[enemy];
         var ex = enemyObj["x"];
         var ey = enemyObj["y"];
-        var edir = enemyObj["direction"];
-
-        if (wasHit) {
-          if (dir == "N") {
-            if ((ey == y - 1 && ex == x) || y == 0) {
-              moves = ["R"];
-            }
-          } else if (dir == "S") {
-            if ((ey == y + 1 && ex == x) || y == dims[1] - 1) {
-              moves = ["R"];
-            }
-          } else if (dir == "E") {
-            if ((ex == x + 1 && ey == y) || x == dims[0] - 1) {
-              moves = ["R"];
-            }
-          } else if (dir == "W") {
-            if ((ex == x - 1 && ey == y) || x == 0) {
-              moves = ["R"];
-            }
-          } else {
-            moves = ["F"];
-          }
-        } else {
-          if (dir == "N" && y - ey <= 2) {
-            moves = ["T"];
-          } else if (dir == "S" && ey - y <= 2) {
-            moves = ["T"];
-          } else if (dir == "E" && ex - x <= 2) {
-            moves = ["T"];
-          } else if (dir == "W" && x - ex <= 2) {
-            moves = ["T"];
-          }
-        }
+        allx.push(ex);
+        ally.push(ey);
       }
     }
-    console.log("new style");
+    if (wasHit) {
+      if (dir == "N") {
+        if ((ally.includes(y - 1) && ex == x) || y == 0) {
+          moves = ["R"];
+        }
+      } else if (dir == "S") {
+        if ((ally.includes(y + 1) && ex == x) || y == dims[1] - 1) {
+          moves = ["R"];
+        }
+      } else if (dir == "E") {
+        if ((allx.includes(x + 1) && ey == y) || x == dims[0] - 1) {
+          moves = ["R"];
+        }
+      } else if (dir == "W") {
+        if ((allx.includes(x - 1) && ey == y) || x == 0) {
+          moves = ["R"];
+        }
+      } else {
+        moves = ["F"];
+      }
+    } else {
+      if (dir == "N" && y - ey <= 2) {
+        moves = ["T"];
+      } else if (dir == "S" && ey - y <= 2) {
+        moves = ["T"];
+      } else if (dir == "E" && ex - x <= 2) {
+        moves = ["T"];
+      } else if (dir == "W" && x - ex <= 2) {
+        moves = ["T"];
+      }
+    }
+    console.log("new new style");
     console.log("move:", moves[0]);
     console.log("dir", dir);
     console.log("x", x);
