@@ -18,8 +18,7 @@ app.post("/", function (req, res) {
     var dir;
     var dims = arena["dims"];
     var wasHit;
-    var allx = [];
-    var ally = [];
+    var enemyInFront = false;
     moves = ["R"];
     for (const player in state) {
       if (
@@ -42,25 +41,40 @@ app.post("/", function (req, res) {
         var enemyObj = state[enemy];
         var ex = enemyObj["x"];
         var ey = enemyObj["y"];
-        allx.push(ex);
-        ally.push(ey);
+        if (dir == "N") {
+          if ((ex = x && ey == y - 1)) {
+            enemyInFront = true;
+          }
+        } else if (dir == "S") {
+          if ((ex = x && ey == y + 1)) {
+            enemyInFront = true;
+          }
+        } else if (dir == "E") {
+          if ((ey = y && ex == x + 1)) {
+            enemyInFront = true;
+          }
+        } else if (dir == "W") {
+          if ((ey = y && ex == x - 1)) {
+            enemyInFront = true;
+          }
+        }
       }
     }
     if (wasHit) {
       if (dir == "N") {
-        if ((ally.includes(y - 1) && ex == x) || y == 0) {
+        if (enemyInFront || y == 0) {
           moves = ["R"];
         }
       } else if (dir == "S") {
-        if ((ally.includes(y + 1) && ex == x) || y == dims[1] - 1) {
+        if (enemyInFront || y == dims[1] - 1) {
           moves = ["R"];
         }
       } else if (dir == "E") {
-        if ((allx.includes(x + 1) && ey == y) || x == dims[0] - 1) {
+        if (enemyInFront || x == dims[0] - 1) {
           moves = ["R"];
         }
       } else if (dir == "W") {
-        if ((allx.includes(x - 1) && ey == y) || x == 0) {
+        if (enemyInFront || x == 0) {
           moves = ["R"];
         }
       } else {
