@@ -62,6 +62,16 @@ app.post("/", function (req, res) {
           } else {
             moves = ["F"];
           }
+        } else {
+          if (dir == "N" && e - ey <= 2) {
+            moves = ["T"];
+          } else if (dir == "S" && ey - y <= 2) {
+            moves = ["T"];
+          } else if (dir == "E" && ex - x <= 2) {
+            moves = ["T"];
+          } else if (dir == "W" && x - ex <= 2) {
+            moves = ["T"];
+          }
         }
       }
     }
