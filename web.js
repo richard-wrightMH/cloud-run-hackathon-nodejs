@@ -75,6 +75,7 @@ app.post("/", function (req, res) {
         }
       }
     }
+    console.log("new style");
     console.log("move:", moves[0]);
     console.log("dir", dir);
     console.log("x", x);
