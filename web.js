@@ -18,7 +18,7 @@ app.post("/", function (req, res) {
     var dir;
     var dims = arena["dims"];
     var wasHit;
-    moves = ["F"];
+    moves = ["R"];
     for (const player in state) {
       if (
         player == "https://cloud-run-hackathon-nodejs-hircheuosa-uc.a.run.app"
@@ -43,66 +43,25 @@ app.post("/", function (req, res) {
         var edir = enemyObj["direction"];
 
         if (wasHit) {
-          moves["F"];
-        }
-        if (dir == "N") {
-          if (y == 0) {
-            moves = ["L", "R"];
-          }
-          if (edir == "S" && y == ey - 1) {
-            if (x != dims[0] - 1) {
-              moves = ["R"];
-            } else {
-              moves = ["L"];
-            }
-          } else if (y - ey <= 3) {
-            moves = ["T"];
-          }
-        }
-        if (dir == "S") {
-          if (y == dims[1] - 1) {
-            moves = ["L", "R"];
-          }
-          if (edir == "N" && y == ey + 1) {
-            if (x != dims[0] - 1) {
-              moves = ["L"];
-            } else {
+          if (dir == "N") {
+            if ((ey == y - 1 && ex == x) || y == 0) {
               moves = ["R"];
             }
-          } else if (ey - y <= 3) {
-            moves = ["T"];
-          }
-        }
-        if (dir == "E") {
-          if (x == dims[0] - 1) {
-            moves = ["L", "R"];
-          }
-          if (edir == "W" && x == ex - 1) {
-            if (y != dims[1] - 1) {
-              moves = ["L"];
-            } else {
+          } else if (dir == "S") {
+            if ((ey == y + 1 && ex == x) || y == dims[1] - 1) {
               moves = ["R"];
             }
-          } else if (ex - x <= 3) {
-            moves = ["T"];
-          }
-        }
-        if (dir == "W") {
-          if (x == 0) {
-            moves = ["L", "R"];
-          }
-          if (edir == "E" && x == ex + 1) {
-            if (y != dims[1] - 1) {
+          } else if (dir == "E") {
+            if ((ex == x + 1 && ey == y) || x == dims[0] - 1) {
               moves = ["R"];
-            } else {
-              moves = ["L"];
             }
-          } else if (x - ex <= 3) {
-            moves = ["T"];
+          } else if (dir == "W") {
+            if ((ex == x - 1 && ey == y) || x == 0) {
+              moves = ["R"];
+            }
+          } else {
+            moves = ["F"];
           }
-        }
-        if (wasHit) {
-          moves = ["F"];
         }
       }
     }
