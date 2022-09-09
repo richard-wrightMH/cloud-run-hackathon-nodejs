@@ -12,7 +12,6 @@ app.post("/", function (req, res) {
   var arena = req.body.arena;
   var state = req.body.arena.state;
   console.log(arena);
-  console.log(state);
 
   try {
     var x;
@@ -88,7 +87,10 @@ app.post("/", function (req, res) {
         }
       }
     }
-    console.log(moves[0]);
+    console.log("move:", moves[0]);
+    console.log("dir", dir);
+    console.log("x", x);
+    console.log("y", y);
   } catch (e) {
     console.log("error", e);
   }
