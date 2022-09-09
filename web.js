@@ -76,18 +76,26 @@ app.post("/", function (req, res) {
     if (wasHit) {
       if (dir == "N") {
         if (enemyInFront || y == 0) {
+          console.log("direction:", dir);
+          console.log("enemy in front or y is 0:");
           moves = ["R"];
         }
       } else if (dir == "S") {
         if (enemyInFront || y == dims[1] - 1) {
+          console.log("direction:", dir);
+          console.log("enemy in front or y is:", dims[1] - 1);
           moves = ["R"];
         }
       } else if (dir == "E") {
         if (enemyInFront || x == dims[0] - 1) {
+          console.log("direction:", dir);
+          console.log("enemy in front or x is:", dims[0] - 1);
           moves = ["R"];
         }
       } else if (dir == "W") {
         if (enemyInFront || x == 0) {
+          console.log("direction:", dir);
+          console.log("enemy in front or x is 0:");
           moves = ["R"];
         }
       } else {
