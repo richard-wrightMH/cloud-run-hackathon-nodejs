@@ -46,28 +46,28 @@ app.post("/", function (req, res) {
           if ((ex = x && ey == y - 1)) {
             enemyInFront = true;
           }
-          if (y - ey <= 2) {
+          if ((ex = x && y - ey <= 2)) {
             shoot = true;
           }
         } else if (dir == "S") {
           if ((ex = x && ey == y + 1)) {
             enemyInFront = true;
           }
-          if (ey - y <= 2) {
+          if ((ex = x && ey - y <= 2)) {
             shoot = true;
           }
         } else if (dir == "E") {
           if ((ey = y && ex == x + 1)) {
             enemyInFront = true;
           }
-          if (ex - x <= 2) {
+          if ((ey = y && ex - x <= 2)) {
             shoot = true;
           }
         } else if (dir == "W") {
           if ((ey = y && ex == x - 1)) {
             enemyInFront = true;
           }
-          if (x - ex <= 2) {
+          if ((ey = y && x - ex <= 2)) {
             shoot = true;
           }
         }
