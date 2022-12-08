@@ -11,7 +11,7 @@ app.get("/", function (req, res) {
 app.post("/", function (req, res) {
   var arena = req.body.arena;
   var state = req.body.arena.state;
-  var grid = createGrid(arena.dims[0], arena.dim[1]);
+  var grid = createGrid(arena.dims[0], arena.dims[1]);
 
   try {
     console.log(state);
@@ -44,4 +44,12 @@ function createGrid(width, height) {
   }
 
   return grid;
+}
+
+function insertProperties(grid, row, col, properties) {
+  // access the object at the given coordinate
+  var obj = grid[row][col];
+
+  // merge the new properties into the object
+  Object.assign(obj, properties);
 }
