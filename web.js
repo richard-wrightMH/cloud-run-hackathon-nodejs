@@ -11,9 +11,10 @@ app.get("/", function (req, res) {
 app.post("/", function (req, res) {
   var arena = req.body.arena;
   var state = req.body.arena.state;
-  var grid = createGrid(arena.dim[0], arena.dim[1]);
+  var grid = createGrid(arena.dims[0], arena.dim[1]);
 
   try {
+    console.log(state);
     console.log(grid);
   } catch (e) {
     console.log("error", e);
