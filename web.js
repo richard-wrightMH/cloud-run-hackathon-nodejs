@@ -9,13 +9,28 @@ app.get("/", function (req, res) {
 });
 
 app.post("/", function (req, res) {
-  var arena = req.body.arena;
-  var state = req.body.arena.state;
-  var grid = createGrid(arena.dims[0], arena.dims[1]);
-
   try {
-    console.log(state);
-    console.log(grid);
+    var arena = req.body.arena;
+    var state = req.body.arena.state;
+    var grid = createGrid(arena.dims[0], arena.dims[1]);
+    var player = {};
+    var enemies = [];
+
+    // assigning player and array of enemies
+    var keys = Object.keys(state);
+    for (var key of keys) {
+      if (
+        key === "https://cloud-run-hackathon-nodejs-6pc4g4eqaq-uc.a.run.app"
+      ) {
+        // property is a player, so assign its values to the player variable
+        player = state[key];
+      } else {
+        enemies.push(state[key]);
+      }
+    }
+
+    console.log(player);
+    console.log(enemies);
   } catch (e) {
     console.log("error", e);
   }
