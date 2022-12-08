@@ -11,123 +11,36 @@ app.get("/", function (req, res) {
 app.post("/", function (req, res) {
   var arena = req.body.arena;
   var state = req.body.arena.state;
+  var grid = createGrid(arena.dim[0], arena.dim[1]);
 
   try {
-    var x;
-    var y;
-    var dir;
-    var dims = arena["dims"];
-    var wasHit;
-    var enemyInFront = false;
-    var shoot = false;
-    moves = ["R"];
-    for (const player in state) {
-      if (
-        player == "https://cloud-run-hackathon-nodejs-hircheuosa-uc.a.run.app"
-      ) {
-        console.log("SETTING COORD");
-        var meObj = state[player];
-        x = meObj["x"];
-        y = meObj["y"];
-        dir = meObj["direction"];
-        wasHit = meObj["wasHit"];
-      }
-    }
-
-    for (const enemy in state) {
-      if (
-        enemy != "https://cloud-run-hackathon-nodejs-hircheuosa-uc.a.run.app"
-      ) {
-        //check if anyone is next to me
-        var enemyObj = state[enemy];
-        var ex = enemyObj["x"];
-        var ey = enemyObj["y"];
-        if (dir == "N") {
-          if ((ex = x && ey == y - 1)) {
-            enemyInFront = true;
-          }
-          if ((ex = x && y - ey <= 2 && y - ey > 0)) {
-            shoot = true;
-          }
-        } else if (dir == "S") {
-          if ((ex = x && ey == y + 1)) {
-            enemyInFront = true;
-          }
-          if ((ex = x && ey - y <= 2 && ey - y > 0)) {
-            shoot = true;
-          }
-        } else if (dir == "E") {
-          if ((ey = y && ex == x + 1)) {
-            enemyInFront = true;
-          }
-          if ((ey = y && ex - x <= 2 && ex - x > 0)) {
-            shoot = true;
-          }
-        } else if (dir == "W") {
-          if ((ey = y && ex == x - 1)) {
-            enemyInFront = true;
-          }
-          if ((ey = y && x - ex <= 2 && x - ex > 0)) {
-            shoot = true;
-          }
-        }
-      }
-    }
-    if (wasHit) {
-      if (dir == "N") {
-        if (enemyInFront || y == 0) {
-          console.log("direction:", dir);
-          console.log("enemy in front or y is 0:");
-          moves = ["R"];
-        }
-      } else if (dir == "S") {
-        if (enemyInFront || y == dims[1] - 1) {
-          console.log("direction:", dir);
-          console.log("enemy in front or y is:", dims[1] - 1);
-          moves = ["R"];
-        }
-      } else if (dir == "E") {
-        if (enemyInFront || x == dims[0] - 1) {
-          console.log("direction:", dir);
-          console.log("enemy in front or x is:", dims[0] - 1);
-          moves = ["R"];
-        }
-      } else if (dir == "W") {
-        if (enemyInFront || x == 0) {
-          console.log("direction:", dir);
-          console.log("enemy in front or x is 0:");
-          moves = ["R"];
-        }
-      } else {
-        moves = ["F"];
-      }
-    } else {
-      if (dir == "N" && shoot) {
-        console.log("shoot");
-        moves = ["T"];
-      } else if (dir == "S" && shoot) {
-        console.log("shoot");
-        moves = ["T"];
-      } else if (dir == "E" && shoot) {
-        console.log("shoot");
-        moves = ["T"];
-      } else if (dir == "W" && shoot) {
-        console.log("shoot");
-        moves = ["T"];
-      }
-    }
-    console.log("new new style");
-    console.log("move:", moves[0]);
-    console.log("dir", dir);
-    console.log("x", x);
-    console.log("y", y);
+    console.log(grid);
   } catch (e) {
     console.log("error", e);
   }
 
   // TODO add your implementation here to replace the random response
 
-  res.send(moves[Math.floor(Math.random() * moves.length)]);
+  res.send("F");
 });
 
 app.listen(process.env.PORT || 8080);
+
+// all helper function
+
+function createGrid(width, height) {
+  // create the grid as a 2D array
+  var grid = new Array(height);
+  for (var i = 0; i < height; i++) {
+    grid[i] = new Array(width);
+  }
+
+  // initialize the grid cells
+  for (var i = 0; i < height; i++) {
+    for (var j = 0; j < width; j++) {
+      grid[i][j] = {};
+    }
+  }
+
+  return grid;
+}
