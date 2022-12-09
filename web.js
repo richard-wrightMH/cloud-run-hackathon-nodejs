@@ -128,7 +128,7 @@ function hasNeighborsInDirection(arena, grid, row, col, direction, distance) {
       for (var i = row + 1; i <= row + distance; i++) {
         if (i >= 0 && i <= arena.dims[1]) {
           if (grid[i][col] == 1) {
-            // cell contains an object, so return true
+            // cell contains an object, so return trues
             return true;
           }
         }
