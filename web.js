@@ -29,8 +29,14 @@ app.post("/", function (req, res) {
       }
     }
 
-    console.log(player);
-    console.log(enemies);
+    //insert player and enemies into the grid
+    grid[player.x][player.y] = player;
+
+    for (var i = 0; i < enemies.length; i++) {
+      insertProperties(grid, enemies[i].x, enemies[i].y, enemies[i]);
+    }
+
+    console.log(grid);
   } catch (e) {
     console.log("error", e);
   }
@@ -54,7 +60,7 @@ function createGrid(width, height) {
   // initialize the grid cells
   for (var i = 0; i < height; i++) {
     for (var j = 0; j < width; j++) {
-      grid[i][j] = {};
+      grid[i][j] = 0;
     }
   }
 
