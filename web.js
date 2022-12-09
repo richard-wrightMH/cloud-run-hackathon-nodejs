@@ -42,7 +42,14 @@ app.post("/", function (req, res) {
     if (player.wasHit) {
       console.log("being hit!");
       if (
-        hasNeighborsInDirection(grid, player.y, player.x, player.direction, 1)
+        hasNeighborsInDirection(
+          arena,
+          grid,
+          player.y,
+          player.x,
+          player.direction,
+          1
+        )
       ) {
         move = "L";
       } else {
@@ -50,7 +57,14 @@ app.post("/", function (req, res) {
       }
     } else {
       if (
-        hasNeighborsInDirection(grid, player.y, player.x, player.direction, 3)
+        hasNeighborsInDirection(
+          arena,
+          grid,
+          player.y,
+          player.x,
+          player.direction,
+          3
+        )
       ) {
         console.log("Throw!");
         move = "T";
@@ -93,7 +107,7 @@ function insertProperties(grid, row, col, properties) {
   grid[row][col] = properties;
 }
 
-function hasNeighborsInDirection(grid, row, col, direction, distance) {
+function hasNeighborsInDirection(arena, grid, row, col, direction, distance) {
   // check the direction and iterate over the cells in that direction
   switch (direction) {
     case "N":
