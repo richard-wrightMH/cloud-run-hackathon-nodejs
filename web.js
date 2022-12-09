@@ -15,7 +15,7 @@ app.post("/", function (req, res) {
     var grid = createGrid(arena.dims[0], arena.dims[1]);
     var player = {};
     var enemies = [];
-    var move = "L";
+    var move = "F";
     console.log(arena.dims);
 
     // assigning player and array of enemies
@@ -77,7 +77,7 @@ app.post("/", function (req, res) {
   }
 
   // TODO add your implementation here to replace the random response
-
+  console.log(move);
   res.send(move);
 });
 
@@ -113,7 +113,7 @@ function hasNeighborsInDirection(arena, grid, row, col, direction, distance) {
     case "N":
       for (var i = row - 1; i >= row - distance; i--) {
         if (i >= 0 && i <= arena.dims[1]) {
-          if ((grid[i][col] = 1)) {
+          if (grid[i][col] == 1) {
             // cell contains an object, so return true
             return true;
           }
