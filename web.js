@@ -182,5 +182,7 @@ function walkingAtEdge(arena, row, col, direction) {
         return true;
       }
       break;
+    default:
+      return false;
   }
 }
