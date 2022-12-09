@@ -31,10 +31,10 @@ app.post("/", function (req, res) {
     }
 
     //insert player and enemies into the grid
-    grid[player.x][player.y] = player;
+    grid[player.y][player.x] = player;
 
     for (var i = 0; i < enemies.length; i++) {
-      insertProperties(grid, enemies[i].x, enemies[i].y, enemies[i]);
+      insertProperties(grid, enemies[i].y, enemies[i].x, enemies[i]);
     }
 
     console.log(grid);
