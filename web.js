@@ -70,8 +70,5 @@ function createGrid(width, height) {
 
 function insertProperties(grid, row, col, properties) {
   // access the object at the given coordinate
-  var obj = grid[row][col];
-
-  // merge the new properties into the object
-  Object.assign(obj, properties);
+  grid[row][col] = properties;
 }
