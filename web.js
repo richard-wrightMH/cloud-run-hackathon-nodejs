@@ -69,7 +69,7 @@ app.post("/", function (req, res) {
         console.log("Throw!");
         move = "T";
       } else {
-        if (walkingToEdge(arena, player.y, player.x, player.direction)) {
+        if (walkingAtEdge(arena, player.y, player.x, player.direction)) {
           move = "L";
         } else {
           move = "F";
