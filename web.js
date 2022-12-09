@@ -15,6 +15,7 @@ app.post("/", function (req, res) {
     var grid = createGrid(arena.dims[0], arena.dims[1]);
     var player = {};
     var enemies = [];
+    var move = "L";
     console.log(arena.dims);
 
     // assigning player and array of enemies
@@ -34,17 +35,36 @@ app.post("/", function (req, res) {
     grid[player.y][player.x] = player;
 
     for (var i = 0; i < enemies.length; i++) {
-      insertProperties(grid, enemies[i].y, enemies[i].x, enemies[i]);
+      insertProperties(grid, enemies[i].y, enemies[i].x, 1);
     }
-
     console.log(grid);
+
+    if (player.wasHit) {
+      console.log("being hit!");
+      if (
+        hasNeighborsInDirection(grid, player.y, player.x, player.direction, 1)
+      ) {
+        move = "L";
+      } else {
+        move = "F";
+      }
+    } else {
+      if (
+        hasNeighborsInDirection(grid, player.y, player.x, player.direction, 3)
+      ) {
+        console.log("Throw!");
+        move = "T";
+      } else {
+        move = "L";
+      }
+    }
   } catch (e) {
     console.log("error", e);
   }
 
   // TODO add your implementation here to replace the random response
 
-  res.send("F");
+  res.send(move);
 });
 
 app.listen(process.env.PORT || 8080);
@@ -71,4 +91,50 @@ function createGrid(width, height) {
 function insertProperties(grid, row, col, properties) {
   // access the object at the given coordinate
   grid[row][col] = properties;
+}
+
+function hasNeighborsInDirection(grid, row, col, direction, distance) {
+  // check the direction and iterate over the cells in that direction
+  switch (direction) {
+    case "N":
+      for (var i = row - 1; i >= row - distance; i--) {
+        if (i >= 0 && i <= arena.dims[1]) {
+          if ((grid[i][col] = 1)) {
+            // cell contains an object, so return true
+            return true;
+          }
+        }
+      }
+      break;
+    case "S":
+      for (var i = row + 1; i <= row + distance; i++) {
+        if (i >= 0 && i <= arena.dims[1]) {
+          if (grid[i][col] == 1) {
+            // cell contains an object, so return true
+            return true;
+          }
+        }
+      }
+      break;
+    case "W":
+      for (var j = col - 1; j >= col - distance; j--) {
+        if (j >= 0 && j <= arena.dims[0]) {
+          if (grid[row][j] == 1) {
+            // cell contains an object, so return true
+            return true;
+          }
+        }
+      }
+      break;
+    case "E":
+      for (var j = col + 1; j <= col + distance; j++) {
+        if (j >= 0 && j <= arena.dims[0]) {
+          if (grid[row][j] == 1) {
+            // cell contains an object, so return true
+            return true;
+          }
+        }
+      }
+      break;
+  }
 }
