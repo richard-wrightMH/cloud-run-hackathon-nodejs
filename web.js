@@ -49,7 +49,7 @@ app.post("/", function (req, res) {
           player.x,
           player.direction,
           1
-        )
+        ) == true
       ) {
         move = "L";
       } else {
@@ -64,12 +64,14 @@ app.post("/", function (req, res) {
           player.x,
           player.direction,
           3
-        )
+        ) == true
       ) {
         console.log("Throw!");
         move = "T";
       } else {
-        if (walkingAtEdge(arena, player.y, player.x, player.direction)) {
+        if (
+          walkingAtEdge(arena, player.y, player.x, player.direction) == true
+        ) {
           move = "L";
         } else {
           move = "F";
