@@ -15,7 +15,7 @@ app.post("/", function (req, res) {
     var grid = createGrid(arena.dims[0], arena.dims[1]);
     var player = {};
     var enemies = [];
-    var move = "F";
+    var move;
     console.log(arena.dims);
 
     // assigning player and array of enemies
@@ -69,7 +69,11 @@ app.post("/", function (req, res) {
         console.log("Throw!");
         move = "T";
       } else {
-        move = "L";
+        if (walkingToEdge(arena, player.y, player.x, player.direction)) {
+          move = "L";
+        } else {
+          move = "F";
+        }
       }
     }
   } catch (e) {
@@ -148,6 +152,32 @@ function hasNeighborsInDirection(arena, grid, row, col, direction, distance) {
             return true;
           }
         }
+      }
+      break;
+  }
+}
+
+function walkingAtEdge(arena, row, col, direction) {
+  // check the direction and iterate over the cells in that direction
+  switch (direction) {
+    case "N":
+      if (row == 0) {
+        return true;
+      }
+      break;
+    case "S":
+      if (row == arena.dims[1]) {
+        return true;
+      }
+      break;
+    case "W":
+      if (col == 0) {
+        return true;
+      }
+      break;
+    case "E":
+      if (col == arena.dims[0]) {
+        return true;
       }
       break;
   }
