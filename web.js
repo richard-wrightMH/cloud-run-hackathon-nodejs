@@ -15,6 +15,7 @@ app.post("/", function (req, res) {
     var grid = createGrid(arena.dims[0], arena.dims[1]);
     var player = {};
     var enemies = [];
+    console.log(arena.dims);
 
     // assigning player and array of enemies
     var keys = Object.keys(state);
